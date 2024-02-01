@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"],
+      "~app": ["src/app/app"],
+      "~config": ["src/app/config"],
+      "~database": ["src/database/database"],
+      "~middleware": ["src/middleware/index"],
+      "~routes": ["src/routes/index"],
+      "~schemas": ["src/schemas/index"],
+      "~services": ["src/services/index"],
+      "~utils": ["src/utils/index"],
+      "~validators": ["src/validators/index"]
+    }
+  },
+  "exclude": ["node_modules"],
+}
