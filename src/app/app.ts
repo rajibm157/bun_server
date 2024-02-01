@@ -5,6 +5,7 @@ import { prettyJSON } from "hono/pretty-json";
 
 import api from "~routes";
 import { errorHandler } from "~middleware";
+import { STATUS } from "~utils";
 
 const app = new Hono();
 
@@ -19,5 +20,9 @@ app.get("/", (c) => {
 app.onError(errorHandler);
 
 app.route("/api", api);
+
+app.notFound((c) => {
+  return c.text("Page not found.", STATUS.NOT_FOUND);
+});
 
 export default app;
