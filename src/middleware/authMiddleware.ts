@@ -1,7 +1,7 @@
 import { Context, Next } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { authService } from "~services";
-import { IPayload, jwtVerify } from "~utils";
+import { IPayload, STATUS, jwtVerify } from "~utils";
 
 export const authMiddleware = async (c: Context, next: Next) => {
   await jwtVerify(c, async () => {
@@ -11,7 +11,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
       c.set("user", data);
       await next();
     } catch (error) {
-      throw new HTTPException(401, { message: "Unauthorized" });
+      throw new HTTPException(STATUS.UNAUTHORIZED, { message: "Unauthorized" });
     }
   });
 };

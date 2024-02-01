@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import { HTTPException } from "hono/http-exception";
 import { Book } from "~schemas";
+import { STATUS } from "~utils";
 
 export const getAllBooks = async () => {
   const books = await Book.find({}).populate("owner");
@@ -9,11 +10,11 @@ export const getAllBooks = async () => {
 
 export const getBookDetails = async (id: string) => {
   if (!mongoose.isValidObjectId(id)) {
-    throw new HTTPException(404, { message: "Id not valid." });
+    throw new HTTPException(STATUS.BAD_REQUEST, { message: "Id not valid." });
   }
   const book = await Book.findById(id).populate("owner");
   if (!book) {
-    throw new HTTPException(401, { message: "Book not found." });
+    throw new HTTPException(STATUS.NOT_FOUND, { message: "Book not found." });
   }
   return { data: book };
 };
